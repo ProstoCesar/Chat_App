@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">chat_app</string>
+    <string name="authentication">Авторизация</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="entry">Вход</string>
+    <string name="exit">Выход</string>
+    <string name="dont_have_account">нет аккаунта?</string>
+
+    
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -9,4 +17,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

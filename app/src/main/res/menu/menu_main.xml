@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.chat_app.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_exit"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/exit"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        app:showAsAction="always" />
 </menu>

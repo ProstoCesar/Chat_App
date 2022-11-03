@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/job/chat_app/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.1935" />
         <entry key="..\:/job/chat_app/app/src/main/res/drawable/rounded_input.xml" value="0.1935" />
+        <entry key="..\:/job/chat_app/app/src/main/res/layout/activity_main.xml" value="0.2608695652173913" />
+        <entry key="..\:/job/chat_app/app/src/main/res/layout/chat_fragment.xml" value="0.5" />
+        <entry key="..\:/job/chat_app/app/src/main/res/layout/content_main.xml" value="0.18541666666666667" />
+        <entry key="..\:/job/chat_app/app/src/main/res/layout/fragment_first.xml" value="0.18541666666666667" />
         <entry key="..\:/job/chat_app/app/src/main/res/layout/login_fragment.xml" value="0.33" />
+        <entry key="..\:/job/chat_app/app/src/main/res/layout/message_adapter.xml" value="0.5" />
+        <entry key="..\:/job/chat_app/app/src/main/res/menu/menu_main.xml" value="0.3625" />
       </map>
     </option>
   </component>

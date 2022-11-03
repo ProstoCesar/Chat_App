@@ -6,8 +6,9 @@
     <string name="entry">Вход</string>
     <string name="exit">Выход</string>
     <string name="dont_have_account">нет аккаунта?</string>
+    <string name="send">Отправить</string>
 
-    
+
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

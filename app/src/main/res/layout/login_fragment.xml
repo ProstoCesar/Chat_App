@@ -50,11 +50,25 @@
                 android:inputType="textPassword"
                 android:minHeight="48dp" />
 
+            <TextView
+                android:id="@+id/login_error_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#FF1A1A"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/buttonEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/entry" />
+
+            <ProgressBar
+                android:id="@+id/login_progressbar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/textViewNoAccount"

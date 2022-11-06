@@ -6,23 +6,23 @@
     app:startDestination="@id/login">
 
     <fragment
-        android:id="@+id/chat"
-        android:name="com.example.chat_app.chat.view.Chat"
+        android:id="@+id/login"
+        android:name="com.example.chat_app.authentication.view.LoginFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/login_fragment">
 
         <action
-            android:id="@+id/app_to_login"
-            app:destination="@id/login" />
+            android:id="@+id/login_to_app"
+            app:destination="@id/chat" />
     </fragment>
     <fragment
-        android:id="@+id/login"
-        android:name="com.example.chat_app.authentication.view.LoginFragment"
+        android:id="@+id/chat"
+        android:name="com.example.chat_app.chat.view.Chat"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/chat_fragment">
 
         <action
-            android:id="@+id/login_to_app"
-            app:destination="@id/chat" />
+            android:id="@+id/app_to_login"
+            app:destination="@id/login" />
     </fragment>
 </navigation>

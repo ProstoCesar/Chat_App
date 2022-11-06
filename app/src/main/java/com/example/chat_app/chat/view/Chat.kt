@@ -44,7 +44,7 @@ class Chat : Fragment() {
         chatViewModel.fetchMessages()
 
         view.recycler_view.layoutManager = LinearLayoutManager(activity)
-        view.recycler_view.adapter = MessageAdapter(chatViewModel.messages.value?.toMutableList() ?: arrayOf(MessageModel("Евгений2", "Сообщение 2", "10:00")).toMutableList())
+        view.recycler_view.adapter = MessageAdapter(chatViewModel.messages.value?.toMutableList() ?: mutableListOf(MessageModel("a", "a", "a")))
 
 
 
@@ -58,10 +58,9 @@ class Chat : Fragment() {
     }
 
     private fun setupClickListeners() {
-        var text = binding.messageTextField.text.toString();
         binding.sendMessageButton.setOnClickListener {
             print("CLICK");
-            chatViewModel.sendMessage(text)
+            chatViewModel.sendMessage(binding.messageTextField.text.toString())
         }
     }
 

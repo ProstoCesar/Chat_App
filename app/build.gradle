@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation 'androidx.databinding:databinding-runtime:7.3.1'
+    implementation 'org.chromium.net:cronet-embedded:76.3809.111'
     def lifecycle_version = "2.2.0"
     def fragments_version = "1.2.5"
 

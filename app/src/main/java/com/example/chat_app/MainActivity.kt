@@ -1,9 +1,12 @@
 package com.example.chat_app
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         .applicationId(getString(R.string.back4app_app_id))
         .clientKey(getString(R.string.back4app_client_key))
         .server(getString(R.string.back4app_server_url))
-        .build());
+        .build())
     }
 
 

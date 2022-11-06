@@ -1,21 +1,24 @@
 package com.example.chat_app.chat.view
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.chat_app.R
 import com.example.chat_app.chat.adapter.MessageAdapter
 import com.example.chat_app.chat.model.MessageModel
 import com.example.chat_app.chat.view_model.ChatViewModel
 import kotlinx.android.synthetic.main.chat_fragment.*
 import kotlinx.android.synthetic.main.chat_fragment.view.*
 import com.example.chat_app.databinding.ChatFragmentBinding
+import com.example.chat_app.repository.MessageRepository
+import android.os.Handler
+import android.os.Looper
+import androidx.core.os.HandlerCompat.postDelayed
 
 /**
  * A simple [Fragment] subclass.
@@ -29,24 +32,21 @@ class Chat : Fragment() {
 
     private val chatViewModel: ChatViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         _binding = ChatFragmentBinding.inflate(inflater, container, false)
+        _binding = ChatFragmentBinding.inflate(inflater, container, false)
 
         val view = binding.root;
 
         chatViewModel.fetchMessages()
-
-        view.recycler_view.layoutManager = LinearLayoutManager(activity)
-        view.recycler_view.adapter = MessageAdapter(chatViewModel.messages.value?.toMutableList() ?: mutableListOf(MessageModel("a", "a", "a")))
-
-
+        Handler(Looper.getMainLooper()).postDelayed({
+            chatViewModel.fetchMessages()
+        }, 10000)
+        view.messages_recycler_view.layoutManager = LinearLayoutManager(activity)
+        view.messages_recycler_view.adapter =
+            MessageAdapter(MessageRepository.messages.value?.toMutableList() ?: mutableListOf())
 
         return view
     }
@@ -58,13 +58,30 @@ class Chat : Fragment() {
     }
 
     private fun setupClickListeners() {
+        // Отправляем текст и очищаем поле
         binding.sendMessageButton.setOnClickListener {
-            print("CLICK");
             chatViewModel.sendMessage(binding.messageTextField.text.toString())
+            binding.messageTextField.text?.clear()
         }
     }
 
-    private  fun fragmentMessagesUpdateObserver() {
-        chatViewModel.messages.observe(viewLifecycleOwner, Observer { messages -> binding.recyclerView.adapter = MessageAdapter(chatViewModel.messages.value?.toMutableList() ?: arrayOf(MessageModel("Евгений2", "Сообщение 2", "10:00")).toMutableList())})
+    private fun fragmentMessagesUpdateObserver() {
+        MessageRepository.messages.observe(
+            viewLifecycleOwner,
+            Observer { messages ->
+                binding.messagesRecyclerView.adapter =
+                    MessageAdapter(MessageRepository.messages.value?.toMutableList() ?: mutableListOf())
+            }
+        )
+
+        chatViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
+            if (isLoading) {
+                binding.messagesProgressbar.visibility = View.VISIBLE
+                binding.sendMessageButton.isEnabled = false
+            } else {
+                binding.messagesProgressbar.visibility = View.GONE
+                binding.sendMessageButton.isEnabled = true
+            }
+        })
     }
 }

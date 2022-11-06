@@ -9,12 +9,23 @@
     android:orientation="vertical"
     tools:context=".chat.view.Chat">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/messages_recycler_view"
         tools:listitem="@layout/message_adapter"
         android:layout_width="match_parent"
 
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ProgressBar
+        android:id="@+id/messages_progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

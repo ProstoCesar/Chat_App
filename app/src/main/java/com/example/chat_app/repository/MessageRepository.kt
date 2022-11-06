@@ -6,35 +6,19 @@ import com.example.chat_app.service.chat.MessageService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.util.concurrent.Delayed
 
 object MessageRepository {
     private val service = MessageService()
 
-    val isLoading = MutableLiveData<Boolean>(false)
     val messages = MutableLiveData<List<MessageModel>>()
 
     fun fetchMessages() {
-        try {
-            isLoading.postValue(true)
-            GlobalScope.launch {
-                messages.postValue(service.getAllMessages())
-            }
-        } catch (e: Exception) {
-
-        } finally {
-            isLoading.postValue(false)
-        }
+        Thread.sleep(2_000)
+        messages.postValue(service.getAllMessages())
     }
 
     fun sendMessage(name: String, message: String) {
-        try {
-            GlobalScope.launch {
-                service.sendMessage(name,message)
-            }
-        } catch (e: Exception) {
-
-        } finally {
-
-        }
+        service.sendMessage(name, message)
     }
 }

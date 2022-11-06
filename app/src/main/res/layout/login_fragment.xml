@@ -19,7 +19,6 @@
             android:padding="16dp">
 
             <TextView
-                android:id="@+id/textViewLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
@@ -29,7 +28,7 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/textEditLogin"
+                android:id="@+id/login_login_textedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -41,7 +40,7 @@
                 android:minHeight="48dp" />
 
             <EditText
-                android:id="@+id/textEditPassword"
+                android:id="@+id/login_password_textedit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"

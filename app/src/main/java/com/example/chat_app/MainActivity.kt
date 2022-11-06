@@ -1,15 +1,20 @@
 package com.example.chat_app
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import com.example.chat_app.databinding.ActivityMainBinding
+import com.parse.Parse
+import com.parse.ParseException
+import com.parse.ParseUser
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,8 +33,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-
+        Parse.initialize(
+        Parse.Configuration.Builder(this)
+        .applicationId(getString(R.string.back4app_app_id))
+        .clientKey(getString(R.string.back4app_client_key))
+        .server(getString(R.string.back4app_server_url))
+        .build());
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.

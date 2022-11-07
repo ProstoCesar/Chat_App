@@ -1,20 +1,13 @@
 package com.example.chat_app.chat.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.TextView
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.example.chat_app.R
 import com.example.chat_app.chat.model.MessageModel
-import com.example.chat_app.chat.view.Chat
-import com.example.chat_app.databinding.ChatFragmentBinding
 import com.example.chat_app.databinding.MessageAdapterBinding
-import org.w3c.dom.Text
+import java.text.SimpleDateFormat
 
+// Простой адаптер для сообщений
 class MessageAdapter(private val arrayList: MutableList<MessageModel>): RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -38,7 +31,8 @@ class MessageAdapter(private val arrayList: MutableList<MessageModel>): Recycler
 
             binding.textView.text = message.name
             binding.textView4.text = message.message
-            binding.textView5.text = message.time
+            // TODO: Нашел такой форматтер для работы с датами и не понимаю почему он желтый
+            binding.textView5.text = SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(message.time)
         }
 
     }

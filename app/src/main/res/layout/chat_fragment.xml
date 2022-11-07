@@ -7,7 +7,7 @@
     android:background="@color/grey"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".chat.view.Chat">
+    tools:context=".chat.view.ChatFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messages_recycler_view"
         tools:listitem="@layout/message_adapter"

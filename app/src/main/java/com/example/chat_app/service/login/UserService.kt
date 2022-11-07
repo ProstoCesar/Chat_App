@@ -1,4 +1,4 @@
-package com.example.chat_app.service
+package com.example.chat_app.service.login
 
 import android.util.Log
 import com.example.chat_app.model.UserModel

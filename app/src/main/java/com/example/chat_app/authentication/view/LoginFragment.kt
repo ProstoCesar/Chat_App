@@ -13,7 +13,6 @@ import com.example.chat_app.R
 import com.example.chat_app.authentication.view_model.LoginViewModel
 import com.example.chat_app.databinding.LoginFragmentBinding
 import com.example.chat_app.repository.UserRepository
-import com.example.chat_app.service.chat.MessageService
 
 /**
  * A simple [Fragment] subclass.
@@ -27,10 +26,11 @@ class LoginFragment : Fragment() {
     private val loginViewModel: LoginViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
 
+        // Присваиваем слушатели
         fragmentLoginUpdateObserver()
+        // Присваиваем обработчики нажатий
         setupClickListeners()
     }
 
@@ -44,13 +44,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun fragmentLoginUpdateObserver() {
+        // Переходим на основной экран, если пользователь появится в репо
         UserRepository.user.observe(viewLifecycleOwner, Observer { user ->
             if (user != null) {
                 findNavController().navigate(R.id.login_to_app)
-
             }
         })
 
+        // Скрываем кнопку входа и показываем лоадер, если что-то грузим и наоборот
         loginViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             if (isLoading) {
                 binding.loginProgressbar.visibility = View.VISIBLE
@@ -60,6 +61,8 @@ class LoginFragment : Fragment() {
                 binding.buttonEntry.visibility = View.VISIBLE
             }
         })
+
+        // Если есть ошибка, то показываем её текст
         loginViewModel.error.observe(viewLifecycleOwner, Observer { error ->
             if (error != null) {
                 binding.loginErrorMessage.visibility = View.VISIBLE
@@ -72,14 +75,18 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
+        // TODO: Не знал как еще повесить отлов изменения текста
+        // Сбрасываем ошибку при изменении текста логина
         binding.loginLoginTextedit.doOnTextChanged { text, start, before, count ->
             binding.loginErrorMessage.visibility = View.GONE
             binding.loginErrorMessage.text = ""
         }
+        // Сбрасываем ошибку при изменении текста пароля
         binding.loginPasswordTextedit.doOnTextChanged { text, start, before, count ->
             binding.loginErrorMessage.visibility = View.GONE
             binding.loginErrorMessage.text = ""
         }
+        // При нажатии на кнопку логина логинимся
         binding.buttonEntry.setOnClickListener {
             val login = binding.loginLoginTextedit.text.toString()
             val password = binding.loginPasswordTextedit.text.toString()

@@ -1,12 +1,8 @@
 package com.example.chat_app.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.chat_app.model.UserModel
-import com.example.chat_app.service.UserService
-import com.example.chat_app.service.login.exception.LoginException
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.example.chat_app.service.login.UserService
 
 
 object UserRepository {
@@ -16,9 +12,5 @@ object UserRepository {
 
     fun login(login: String, password: String) {
         user.postValue(service.login(login, password))
-    }
-
-    fun logout() {
-        user.value = null
     }
 }

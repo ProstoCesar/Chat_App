@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/chat"
-        android:name="com.example.chat_app.chat.view.Chat"
+        android:name="com.example.chat_app.chat.view.ChatFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/chat_fragment">
 

@@ -1,7 +1,6 @@
 package com.example.chat_app.chat.view
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,22 +9,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chat_app.chat.adapter.MessageAdapter
-import com.example.chat_app.chat.model.MessageModel
 import com.example.chat_app.chat.view_model.ChatViewModel
 import kotlinx.android.synthetic.main.chat_fragment.*
 import kotlinx.android.synthetic.main.chat_fragment.view.*
 import com.example.chat_app.databinding.ChatFragmentBinding
-import com.example.chat_app.repository.MessageRepository
+import com.example.chat_app.repository.ChatRepository
 import android.os.Handler
 import android.os.Looper
-import androidx.core.os.HandlerCompat.postDelayed
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Chat.newInstance] factory method to
+ * Use the [ChatFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Chat : Fragment() {
+class ChatFragment : Fragment() {
     // View Binding
     private var _binding: ChatFragmentBinding? = null
     private val binding get() = _binding!!
@@ -40,20 +37,29 @@ class Chat : Fragment() {
 
         val view = binding.root;
 
+        // Запускаем загрузку сообщений во время загрузки фрагмента
         chatViewModel.fetchMessages()
+
+        // Вешаем таймер на загрузку сообщений раз в 10 секунд
         Handler(Looper.getMainLooper()).postDelayed({
             chatViewModel.fetchMessages()
         }, 10000)
+
+        // Не совсем пока понимаю эту строку
         view.messages_recycler_view.layoutManager = LinearLayoutManager(activity)
+        // Присваиваем адаптер, который отвечает за отображение данных в одном элементе списка
         view.messages_recycler_view.adapter =
-            MessageAdapter(MessageRepository.messages.value?.toMutableList() ?: mutableListOf())
+            MessageAdapter(ChatRepository.messages.value?.toMutableList() ?: mutableListOf())
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Присваиваем слушатели
         fragmentMessagesUpdateObserver()
+        // Присваиваем обработчики нажатий
         setupClickListeners()
     }
 
@@ -66,14 +72,16 @@ class Chat : Fragment() {
     }
 
     private fun fragmentMessagesUpdateObserver() {
-        MessageRepository.messages.observe(
+        // При обновлении списка сообщений, обновляем адаптер
+        ChatRepository.messages.observe(
             viewLifecycleOwner,
             Observer { messages ->
                 binding.messagesRecyclerView.adapter =
-                    MessageAdapter(MessageRepository.messages.value?.toMutableList() ?: mutableListOf())
+                    MessageAdapter(ChatRepository.messages.value?.toMutableList() ?: mutableListOf())
             }
         )
 
+        // Если что-то грузится, то показываем лоадер и отключаем кнопку отправки сообщений
         chatViewModel.isLoading.observe(viewLifecycleOwner, Observer { isLoading ->
             if (isLoading) {
                 binding.messagesProgressbar.visibility = View.VISIBLE

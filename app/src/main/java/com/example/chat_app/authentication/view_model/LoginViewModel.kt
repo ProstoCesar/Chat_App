@@ -11,7 +11,10 @@ class LoginViewModel: ViewModel() {
     val isLoading = MutableLiveData<Boolean>(false)
     val error = MutableLiveData<LoginException?>(null)
 
+    /// Функция логина. При удаче в UserRepo устанавливается переменная user
+    /// При ошибке, устанавливается переменная error
     fun login(login: String, password: String) {
+        // TODO: У меня пока сложно с потоками и я нашел это, чтобы запустить код в отдельном потоке
         GlobalScope.launch {
                 try {
                     error.postValue(null)
